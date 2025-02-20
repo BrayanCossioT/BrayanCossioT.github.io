@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj con Números como Agujas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .reloj {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .numero {
+            position: absolute;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            transform-origin: 50% 100%;
+        }
+
+        .segundos {
+            font-size: 10px;
+            color: red;
+        }
+
+        .minutos {
+            font-size: 14px;
+            color: black;
+        }
+
+        .horas {
+            font-size: 18px;
+            color: black;
+        }
+
+        .centro {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="reloj">
+        <div class="centro"></div>
+    </div>
+
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            const segundos = ahora.getSeconds();
+            const minutos = ahora.getMinutes();
+            const horas = ahora.getHours();
+
+            // Limpiar el reloj para agregar las nuevas "agujas" convertidas en números
+            const reloj = document.querySelector('.reloj');
+            reloj.innerHTML = '<div class="centro"></div>'; // Limpiar y dejar solo el centro
+
+            // Calcular los ángulos para cada número
+            const anguloSegundos = segundos * 6; // 360 grados / 60 segundos
+            const anguloMinutos = (minutos * 6) + (segundos / 60); // 360 grados / 60 minutos
+            const anguloHoras = ((horas % 12) * 30) + (minutos / 60) * 30; // 360 grados / 12 horas
+
+            // Crear el número que representa el segundero
+            const segundero = document.createElement('div');
+            segundero.classList.add('numero', 'segundos');
+            segundero.style.transform = `rotate(${anguloSegundos}deg) translate(120px) rotate(-${anguloSegundos}deg)`;
+            segundero.textContent = segundos.toString().padStart(2, '0');
+
+            // Crear el número que representa el minutero
+            const minutero = document.createElement('div');
+            minutero.classList.add('numero', 'minutos');
+            minutero.style.transform = `rotate(${anguloMinutos}deg) translate(100px) rotate(-${anguloMinutos}deg)`;
+            minutero.textContent = minutos.toString().padStart(2, '0');
+
+            // Crear el número que representa el horero
+            const horero = document.createElement('div');
+            horero.classList.add('numero', 'horas');
+            horero.style.transform = `rotate(${anguloHoras}deg) translate(80px) rotate(-${anguloHoras}deg)`;
+            horero.textContent = (horas % 12 || 12).toString().padStart(2, '0');
+
+            // Agregar los números al reloj
+            reloj.appendChild(segundero);
+            reloj.appendChild(minutero);
+            reloj.appendChild(horero);
+        }
+
+        // Actualizar el reloj cada segundo
+        setInterval(actualizarReloj, 1000);
+        actualizarReloj();
+    </script>
+</body>
+</html>
