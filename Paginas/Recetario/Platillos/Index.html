@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platos Peruanos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="background"></div>
+    <div id="overlay">
+        <h1>Platos Peruanos</h1>
+        <div id="categories">
+            <div class="top-row">
+                <button class="category" onclick="showRandomDish('criolla')">Comida Criolla</button>
+                <button class="category" onclick="showRandomDish('marina')">Comida Marina</button>
+                <button class="category" onclick="showRandomDish('sierra')">Platos de la Sierra</button>
+                <button class="category" onclick="showRandomDish('selva')">Platos de la Selva</button>
+            </div>
+            <div class="bottom-row">
+                <button class="category" onclick="showRandomDish('sopas')">Sopas y Caldos</button>
+                <button class="category" onclick="showRandomDish('postres')">Postres Dulces</button>
+                <button class="category" onclick="showRandomDish('bebidas')">Bebidas</button>
+            </div>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="dish-name"></p>
+        </div>
+    </div>
+    
+    <div id="result">
+        <p><strong>Plato seleccionado:</strong></p>
+        <p id="dish-name"></p>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
